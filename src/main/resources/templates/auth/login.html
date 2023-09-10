@@ -44,8 +44,10 @@
     </div>
 
     <form action="/process_login" method="post">
-        <input type="text" name="username" class="auth-input" placeholder="Username"><br/>
-        <input type="password" name="password" class="auth-input" placeholder="Password"><br/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <input type="text" name="username" class="auth-input" placeholder="Username"/><br/>
+        <input type="password" name="password" class="auth-input" placeholder="Password"/><br/>
         <button type="submit" class="auth-button">LOGIN</button>
     </form>
 </div>

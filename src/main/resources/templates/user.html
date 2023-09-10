@@ -33,13 +33,15 @@
 </head>
 <body>
 
+<form th:action="@{/logout}" th:method="POST">
+    <button type="submit" class="auth-button right-top-button">LOGOUT</button>
+</form>
+
 <div class="container">
     <div class="welcome">
-        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to your personal page</h1></p>
+        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to user page</h1></p>
     </div>
 </div>
-
-<a href="/logout" class="auth-button right-top-button">LOGOUT</a>
 
 </body>
 </html>

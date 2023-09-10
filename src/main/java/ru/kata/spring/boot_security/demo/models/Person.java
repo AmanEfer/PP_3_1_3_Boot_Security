@@ -21,9 +21,12 @@ public class Person {
     private String username;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 4, message = "Password should be from 4")
+    @Size(min = 4, message = "Password should have 4 symbols at least")
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
 
     public Person() {
     }
@@ -54,6 +57,14 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
