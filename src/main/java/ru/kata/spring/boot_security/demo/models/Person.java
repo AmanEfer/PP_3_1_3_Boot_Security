@@ -21,7 +21,7 @@ public class Person {
     private String username;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 4, max = 20, message = "Password should be from 4 to 20 symbols")
+    @Size(min = 4, message = "Password should be from 4")
     @Column(name = "password")
     private String password;
 
