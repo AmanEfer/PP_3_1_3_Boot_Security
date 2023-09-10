@@ -8,41 +8,41 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kata.spring.boot_security.demo.services.PersonDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    //    private final SuccessUserHandler successUserHandler;
+    private final SuccessUserHandler successUserHandler;
     private final PersonDetailsService personDetailsService;
 
     @Autowired
-    public WebSecurityConfig(PersonDetailsService personDetailsService) {
+    public WebSecurityConfig(PersonDetailsService personDetailsService, SuccessUserHandler successUserHandler) {
         this.personDetailsService = personDetailsService;
-//        this.successUserHandler = successUserHandler;
+        this.successUserHandler = successUserHandler;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/", "/auth/login","/auth/registration", "/error").permitAll()
-                .anyRequest().authenticated()
+                    .antMatchers("/admin").hasRole("ADMIN")
+                    .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                    .antMatchers("/", "/auth/login", "/auth/registration", "/error").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/auth/login")
-                .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/user", true)
-                .failureUrl("/auth/login?error")
+                    .formLogin().loginPage("/auth/login")
+                    .loginProcessingUrl("/process_login")
+                    .successHandler(successUserHandler)
+//                    .defaultSuccessUrl("/user", true)
+                    .failureUrl("/auth/login?error")
 //                .formLogin().successHandler(successUserHandler)
 //                .permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .permitAll();
+                    .logout()
+                    .logoutSuccessUrl("/")
+                    .permitAll();
     }
 
     @Override
@@ -56,18 +56,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    }
-    // аутентификация inMemory
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }
