@@ -24,6 +24,11 @@
             font-weight: bold;
         }
 
+        .auth-input {
+            margin: 10px;
+            padding: 5px;
+        }
+
         .right-top-button {
             position: absolute;
             top: 10px;
@@ -35,11 +40,21 @@
 
 <div class="container">
     <div class="welcome">
-        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to your personal page</h1></p>
+        <p>LOGIN PAGE</p>
     </div>
+
+    <form action="/process_login" method="post">
+        <input type="text" name="username" class="auth-input" placeholder="Username"><br/>
+        <input type="password" name="password" class="auth-input" placeholder="Password"><br/>
+        <button type="submit" class="auth-button">LOGIN</button>
+    </form>
 </div>
 
-<a href="/logout" class="auth-button right-top-button">LOGOUT</a>
+<div th:if="${param.error}" style="color: red; text-align: center;">
+    <div style="font-weight: bold;">Wrong username or password</div>
+</div>
+
+<a href="/" class="auth-button right-top-button">MAIN PAGE</a>
 
 </body>
 </html>
