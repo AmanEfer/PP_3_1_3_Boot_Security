@@ -3,21 +3,20 @@ package ru.kata.spring.boot_security.demo.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.kata.spring.boot_security.demo.models.Person;
+import ru.kata.spring.boot_security.demo.models.User;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class PersonDetails implements UserDetails {
 
-    private final Person person;
+    private final User person;
 
-    public PersonDetails(Person person) {
+    public PersonDetails(User person) {
         this.person = person;
     }
 
-    public Person getPerson() {
+    public User getPerson() {
         return person;
     }
 

@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "persons")
-public class Person {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class Person {
     @Column(name = "role")
     private Set<Role> role;
 
-    public Person() {
+    public User() {
     }
 
-    public Person(String username) {
+    public User(String username) {
         this.username = username;
     }
 

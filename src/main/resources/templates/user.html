@@ -33,13 +33,9 @@
 </head>
 <body>
 
-<!--<form th:action="@{/logout}" th:method="POST">-->
-<!--    <button type="submit" class="auth-button right-top-button">LOGOUT</button>-->
-<!--</form>-->
-
 <div class="container">
     <div class="welcome">
-        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to user page</h1></p>
+        <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to user page</h1>
     </div>
 </div>
 
@@ -47,4 +43,10 @@
 
 </body>
 </html>
+
+
+
+
+
+
 
