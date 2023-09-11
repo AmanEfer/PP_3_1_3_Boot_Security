@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.models.Person;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class PersonDetails implements UserDetails {
 
@@ -22,7 +23,10 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
+//        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
+        return person.getRole().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+                .collect(Collectors.toSet());
     }
 
     @Override

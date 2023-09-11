@@ -33,9 +33,9 @@
 </head>
 <body>
 
-<form th:action="@{/logout}" th:method="POST">
-    <button type="submit" class="auth-button right-top-button">LOGOUT</button>
-</form>
+<!--<form th:action="@{/logout}" th:method="POST">-->
+<!--    <button type="submit" class="auth-button right-top-button">LOGOUT</button>-->
+<!--</form>-->
 
 <div class="container">
     <div class="welcome">
@@ -43,5 +43,8 @@
     </div>
 </div>
 
+<a th:href="@{/}" class="auth-button right-top-button">LOGOUT</a>
+
 </body>
 </html>
+

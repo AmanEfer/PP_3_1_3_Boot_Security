@@ -4,6 +4,7 @@ package ru.kata.spring.boot_security.demo.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @Entity
@@ -25,8 +26,13 @@ public class Person {
     @Column(name = "password")
     private String password;
 
+    //    @Column(name = "role")
+//    private String role;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "person_id"))
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Set<Role> role;
 
     public Person() {
     }
@@ -59,11 +65,11 @@ public class Person {
         this.password = password;
     }
 
-    public String getRole() {
+    public Set<Role> getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Set<Role> role) {
         this.role = role;
     }
 

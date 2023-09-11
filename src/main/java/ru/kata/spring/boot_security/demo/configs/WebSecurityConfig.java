@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.kata.spring.boot_security.demo.services.PersonDetailsService;
 
 @Configuration
@@ -27,22 +28,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/admin").hasRole("ADMIN")
-                    .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/", "/auth/login", "/auth/registration", "/error").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/", "/auth/login", "/auth/registration", "/error").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/auth/login")
-                    .loginProcessingUrl("/process_login")
-                    .successHandler(successUserHandler)
+                .formLogin().loginPage("/auth/login")
+                .loginProcessingUrl("/process_login")
+                .successHandler(successUserHandler)
 //                    .defaultSuccessUrl("/user", true)
-                    .failureUrl("/auth/login?error")
+                .failureUrl("/auth/login?error")
 //                .formLogin().successHandler(successUserHandler)
-//                .permitAll()
+//                    .permitAll()
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/")
-                    .permitAll();
+                .logout()
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/");
     }
 
     @Override
