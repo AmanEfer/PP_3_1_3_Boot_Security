@@ -202,8 +202,9 @@
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getUsername()}"></td>
 <!--        <td th:text="${user.getRole()}"></td>-->
-        <td><a th:href="@{'/edit/' + ${user.getId()}}">Edit</a></td>
-        <td><a th:href="@{'/delete/' + ${user.getId()}}">Delete</a></td>
+        <td><a th:href="@{'/show/' + ${user.getId()}}">SHOW</a></td>
+        <td><a th:href="@{'/edit/' + ${user.getId()}}">EDIT</a></td>
+        <td><a th:href="@{'/delete/' + ${user.getId()}}">DELETE</a></td>
     </tr>
     </tbody>
 </table>

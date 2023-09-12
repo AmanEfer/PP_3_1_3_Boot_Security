@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+
+<form th:method="POST" th:action="@{/static}" th:object="${user}">
+  <label for="username">Enter username</label>
+  <input type="text" th:field="*{username}" id="username"/>
+  <br/>
+  <label for="password">Enter password</label>
+  <input type="text" th:field="*{password}" id="password"/>
+  <br/>
+  <label for="role">Enter role</label>
+  <input type="text" th:field="*{role}" id="role"/>
+</form>
+
+<br/>
+<a th:href="@{/{id}/edit(id=${user.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+  <input type="submit" value="Delete user"/>
+</form>
+
+<br/>
+<br/>
+<a href="/static">Main page</a>
+
+</body>
+
+</html>
