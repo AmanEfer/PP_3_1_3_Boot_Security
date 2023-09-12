@@ -26,8 +26,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    //    @Column(name = "role")
-//    private String role;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "person_id"))
     @Enumerated(EnumType.STRING)

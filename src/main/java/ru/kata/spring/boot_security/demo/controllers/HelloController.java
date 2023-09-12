@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kata.spring.boot_security.demo.security.PersonDetails;
+import ru.kata.spring.boot_security.demo.security.UserDetailsImpl;
 @Controller
 @RequestMapping("/")
 public class HelloController {
@@ -25,9 +25,9 @@ public class HelloController {
     @GetMapping("/showUserInfo")
     public String showUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
+        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
 
-        System.out.println(personDetails.getPerson());
+        System.out.println(userDetailsImpl.getPerson());
 
         return "/index";
     }
