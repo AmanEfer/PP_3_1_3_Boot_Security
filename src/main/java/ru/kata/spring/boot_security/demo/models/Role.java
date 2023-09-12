@@ -2,19 +2,57 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Role implements GrantedAuthority {
-    USER("ROLE_USER"),
-    ADMIN("ROLE_ADMIN");
+import javax.persistence.*;
 
-    private final String name;
+@Entity
+@Table(name = "roles")
+public class Role implements GrantedAuthority {
 
-    Role(String name) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    public Role() {
+    }
+
+    public Role(String name) {
         this.name = name;
     }
 
-
     @Override
     public String getAuthority() {
+        return "ROLE_" + name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

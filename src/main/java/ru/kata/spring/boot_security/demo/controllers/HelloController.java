@@ -15,13 +15,6 @@ public class HelloController {
         return "index";
     }
 
-
-//    @GetMapping("/admin")
-//    public String adminPage() {
-//        return "admin";
-//    }
-
-
     @GetMapping("/showUserInfo")
     public String showUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

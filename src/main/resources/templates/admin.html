@@ -1,3 +1,135 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-color: #EFEFEF;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            text-align: center;-->
+<!--            padding: 100px;-->
+<!--        }-->
+
+<!--        .welcome {-->
+<!--            font-size: 24px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .auth-button {-->
+<!--            background-color: #002855;-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .right-top-button {-->
+<!--            position: absolute;-->
+<!--            top: 10px;-->
+<!--            right: 10px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <div class="welcome">-->
+<!--        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to admin page</h1></p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div th:each="user : ${users}">-->
+<!--    <a th:href="@{/{id}(id=${user.getId()})}" th:text="${user.getUsername()}">user</a>-->
+<!--</div>-->
+
+
+<!--<a th:href="@{/}" class="auth-button right-top-button">LOGOUT</a>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-color: #EFEFEF;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            text-align: center;-->
+<!--            padding: 100px;-->
+<!--        }-->
+
+<!--        .welcome {-->
+<!--            font-size: 24px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .auth-button {-->
+<!--            background-color: #002855;-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .right-top-button {-->
+<!--            position: absolute;-->
+<!--            top: 10px;-->
+<!--            right: 10px;-->
+<!--        }-->
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            border: 1px solid #ddd;-->
+<!--            padding: 8px;-->
+<!--            text-align: left;-->
+<!--        }-->
+
+<!--        th {-->
+<!--            background-color: #002855;-->
+<!--            color: white;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <div class="welcome">-->
+<!--        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to admin page</h1></p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Username</th>-->
+<!--        <th>Password</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="user : ${users}">-->
+<!--        <td th:text="${user.getId()}"></td>-->
+<!--        <td th:text="${user.getUsername()}"></td>-->
+<!--        <td th:text="${user.getPassword()}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<a th:href="@{/}" class="auth-button right-top-button">LOGOUT</a>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -29,6 +161,22 @@
             top: 10px;
             right: 10px;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #002855;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -39,10 +187,26 @@
     </div>
 </div>
 
-<div th:each="user : ${users}">
-    <a th:href="@{/{id}(id=${user.getId()})}" th:text="${user.getUsername()}">user</a>
-</div>
-
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+<!--        <th>Role</th>-->
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+<!--        <td th:text="${user.getRole()}"></td>-->
+        <td><a th:href="@{'/edit/' + ${user.getId()}}">Edit</a></td>
+        <td><a th:href="@{'/delete/' + ${user.getId()}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
 
 <a th:href="@{/}" class="auth-button right-top-button">LOGOUT</a>
 

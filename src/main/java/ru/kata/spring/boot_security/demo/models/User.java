@@ -4,11 +4,12 @@ package ru.kata.spring.boot_security.demo.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
-@Table(name = "persons")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -26,11 +27,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "person_id"))
-    @Enumerated(EnumType.STRING)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(name = "role")
-    private Set<Role> role;
+    private Set<Role> role = new HashSet<>();
 
     public User() {
     }

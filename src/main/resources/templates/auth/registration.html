@@ -43,19 +43,23 @@
         <p>REGISTRATION PAGE</p>
     </div>
 <!--    th:object="${user}-->
-    <form th:action="@{/auth/registration}" th:method="POST">
-        <input type="text" th:field="*{user.username}" id="username" class="auth-input" placeholder="Username">
-        <div style="color: red" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}">Username error</div>
+    <form th:action="@{/auth/registration}" th:method="POST" th:object="${user}">
+        <input type="text" th:field="*{username}" id="username" class="auth-input" placeholder="Username">
+        <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
         <br/>
-        <input type="password" th:field="*{user.password}" id="password" class="auth-input" placeholder="Password">
-        <div style="color: red" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}">Password error</div>
+        <input type="password" th:field="*{password}" id="password" class="auth-input" placeholder="Password">
+        <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
         <br/>
-        <label>
-            <input type="radio" th:field="*{roleWrapper.role}" th:value="${T(ru.kata.spring.boot_security.demo.models.Role).USER}"> USER
-        </label>
-        <label>
-            <input type="radio" th:field="*{roleWrapper.role}" th:value="${T(ru.kata.spring.boot_security.demo.models.Role).ADMIN}"> ADMIN
-        </label>
+        <select name="selectedRole" id="selectedRole">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
+<!--        <label>-->
+<!--            <input type="radio" th:field="*{roleWrapper.role}" th:value="${T(ru.kata.spring.boot_security.demo.models.Role).USER}" checked> USER-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input type="radio" th:field="*{roleWrapper.role}" th:value="${T(ru.kata.spring.boot_security.demo.models.Role).ADMIN}"> ADMIN-->
+<!--        </label>-->
         <br/><br/>
         <button type="submit" class="auth-button">SIGN UP</button>
     </form>
