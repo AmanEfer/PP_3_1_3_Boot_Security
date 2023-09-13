@@ -23,7 +23,7 @@ public class User {
     private String username;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 4, message = "Password should have 4 symbols at least")
+    @Size(min = 2, message = "Password should have 2 symbols at least")
     @Column(name = "password")
     private String password;
 
@@ -31,11 +31,24 @@ public class User {
     @Column(name = "role")
     private Set<Role> role = new HashSet<>();
 
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "salary")
+    private int salary;
+
     public User() {
     }
 
-    public User(String username) {
+    public User(String username, String lastName, String department, int salary) {
         this.username = username;
+        this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
     }
 
     public Long getId() {
@@ -70,12 +83,40 @@ public class User {
         this.role = role;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
-        return "Person{" +
+        return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
+                ", lastName='" + lastName + '\'' +
+                ", department='" + department + '\'' +
+                ", salary=" + salary +
                 '}';
     }
 }

@@ -44,11 +44,10 @@ public class AuthController {
     public String performRegistration(@ModelAttribute("user") @Valid User user,
                                       @RequestParam("selectedRole") String selectedRole,
                                       BindingResult bindingResult) {
-        System.out.println(selectedRole);
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "/auth/registration";
+            return "redirect:/auth/registration";
         }
 
         registrationService.register(user, selectedRole);

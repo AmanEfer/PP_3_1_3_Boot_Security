@@ -1,36 +1,92 @@
 <!DOCTYPE html>
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
+  <style>
+    body {
+      background-color: #EFEFEF;
+    }
 
+    .container {
+      text-align: center;
+      padding: 100px;
+    }
+
+    .welcome {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .auth-button {
+      background-color: #002855;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .left-top-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .right-top-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #002855;
+      color: white;
+    }
+  </style>
+</head>
 <body>
 
-<form th:method="POST" th:action="@{/static}" th:object="${user}">
-  <label for="username">Enter username</label>
-  <input type="text" th:field="*{username}" id="username"/>
-  <br/>
-  <label for="password">Enter password</label>
-  <input type="text" th:field="*{password}" id="password"/>
-  <br/>
-  <label for="role">Enter role</label>
-  <input type="text" th:field="*{role}" id="role"/>
-</form>
+<div class="container">
+  <div class="welcome">
+    <p><h1 th:inline="text">This is [[${user.username}]]'s page</h1></p>
+  </div>
+</div>
 
-<br/>
-<a th:href="@{/{id}/edit(id=${user.getId()})}">Edit</a>
+<h1 style="text-align: center; margin-top: 20px;">User Details</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Last Name</th>
+    <th>Department</th>
+    <th>Salary</th>
+    <th>Roles</th>
+  </tr>
+  <tr th:object="${user}">
+    <td th:text="*{id}"></td>
+    <td th:text="*{username}"></td>
+    <td th:text="*{lastName}"></td>
+    <td th:text="*{department}"></td>
+    <td th:text="*{salary}"></td>
+    <td>
+      <ul>
+        <li th:each="role : *{role}" th:text="${role.name}"></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
-<form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
-  <input type="submit" value="Delete user"/>
-</form>
-
-<br/>
-<br/>
-<a href="/static">Main page</a>
+<a th:href="@{/}" class="auth-button right-top-button">LOGOUT</a>
+<a th:href="@{/admin}" class="auth-button left-top-button">ADMIN PAGE</a>
 
 </body>
-
 </html>
