@@ -4,18 +4,23 @@
     <style>
         body {
             background-color: #EFEFEF;
+            margin: 0; /* Удалить отступы по умолчанию */
+            padding: 0; /* Удалить отступы по умолчанию */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Выравнивание по центру по вертикали */
+            justify-content: center; /* Выравнивание по центру по горизонтали */
+            min-height: 100vh; /* Заполнить всю высоту видимой области */
         }
 
         .container {
             text-align: center;
-            padding: 100px;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .welcome {
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 20px; /* Увеличение расстояния между заголовком и таблицей */
         }
 
         .auth-button {
@@ -35,6 +40,7 @@
         table {
             border-collapse: collapse;
             margin: 0 auto; /* Center the table within its container */
+            margin-top: 20px; /* Увеличение расстояния между заголовком и таблицей */
         }
 
         th, td {
@@ -53,7 +59,7 @@
 
 <div class="container">
     <div class="welcome">
-        <p><h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to admin page</h1></p>
+        <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]], welcome to admin page</h1>
     </div>
 </div>
 
@@ -75,9 +81,17 @@
     <tr th:each="user : ${users}">
         <td th:text="${user.getUsername()}"></td>
         <td th:text="${user.getLastName()}"></td>
-        <td><a th:href="@{/admin/{id}(id=${user.getId()})}">SHOW</a></td>
+        <td>
+            <form th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="SHOW"/>
+            </form>
+        </td>
         <td><a th:href="@{'/edit/' + ${user.getId()}}">EDIT</a></td>
-        <td><a th:href="@{'/delete/' + ${user.getId()}}">DELETE</a></td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="DELETE"/>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
