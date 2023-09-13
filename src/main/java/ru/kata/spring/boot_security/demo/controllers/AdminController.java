@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.services.RegistrationService;
 import ru.kata.spring.boot_security.demo.services.UserService;
-import ru.kata.spring.boot_security.demo.util.RoleValidator;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
@@ -22,17 +21,15 @@ public class AdminController {
     private final RoleRepository roleRepository;
     private final UserValidator userValidator;
     private final RegistrationService registrationService;
-    private final RoleValidator roleValidator;
 
 
     @Autowired
     public AdminController(UserService userService, RoleRepository roleRepository,
-                           UserValidator userValidator, RegistrationService registrationService, RoleValidator roleValidator) {
+                           UserValidator userValidator, RegistrationService registrationService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.userValidator = userValidator;
         this.registrationService = registrationService;
-        this.roleValidator = roleValidator;
     }
 
     @GetMapping
