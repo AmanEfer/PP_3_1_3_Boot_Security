@@ -12,14 +12,4 @@ public class HelloController {
     public String index() {
         return "index";
     }
-
-//    @GetMapping("/showUserInfo")
-//    public String showUserInfo() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
-//
-//        System.out.println(userDetailsImpl.getPerson());
-//
-//        return "/index";
-//    }
 }

@@ -8,7 +8,9 @@ import ru.kata.spring.boot_security.demo.models.User;
 public class RoleValidator {
 
     public void addRole(User user, String selectedRole) {
-        if (!validate(user, selectedRole)) {
+        boolean validate = validate(user, selectedRole);
+        System.out.println(validate);
+        if (!validate) {
             Role role = new Role(selectedRole);
             role.setUser(user);
             user.getRole().add(role);

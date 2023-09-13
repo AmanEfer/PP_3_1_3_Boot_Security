@@ -1,12 +1,14 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,6 +32,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        Optional<User> user = usersRepository.findByUsername(username);
+
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user.get();
+    }
+
+    @Override
     @Transactional
     public void saveUser(User person) {
         usersRepository.save(person);
@@ -37,9 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(Long id, User person) {
-        person.setId(id);
-        usersRepository.save(person);
+    public void updateUser(Long id, User user) {
+//        user.setId(id);
+        usersRepository.save(user);
     }
 
     @Override

@@ -9,6 +9,7 @@ public interface UserService {
     public List<User> getAllUsers();
 
     public User getUser(Long id);
+    public User getUserByUsername(String username);
 
     public void saveUser(User person);
 
